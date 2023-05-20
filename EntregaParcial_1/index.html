@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    #cuerpo {
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+    }
+
+    #datos {
+      background-color: rgb(230, 214, 125);
+      height: auto;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      border-style: solid;
+      border-width: 4px;
+      border-color: white;
+      border-radius: 15px;
+    }
+
+    button {
+      background-color: black;
+      border-color: black;
+      border-width: 5px;
+      width: 70px;
+      color: aliceblue;
+      border-radius: 5px;
+    }
+
+    #opciones {
+      display: flex;
+      flex-direction: column;
+      height: 45%;
+    }
+
+    #cboLista {
+      width: 20%;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    #grilla {
+      background-color: cornflowerblue;
+      height: 50%;
+      width: auto;
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      overflow-x: auto;
+    }
+
+    #divAgregar {
+      margin-top: 4%;
+      margin-bottom: 4%;
+      height: 20%;
+      text-align: center;
+    }
+
+    #divChecks {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .headCeldas {
+      border-style: solid;
+    }
+
+    .headCeldas:hover {
+      cursor: pointer;
+    }
+
+    .bodyID,
+    .bodyNombre,
+    .bodyApellido,
+    .bodyEdad,
+    .bodyEquipo,
+    .bodyPosicion,
+    .bodyCantGoles,
+    .bodyTitulo,
+    .bodyFacultad,
+    .bodyAnoGraduacion {
+      border-style: solid;
+      border-width: 1px;
+      height: 18px;
+      text-align: center;
+    }
+
+    #botonAgregar {
+      width: 80px;
+      height: 30px;
+    }
+
+    #ABM {
+      height: auto;
+      width: 40%;
+      margin-top: 15px;
+      background-color: cornflowerblue;
+      border-style: solid;
+      border-color: white;
+      border-width: 4px;
+      border-radius: 15px;
+    }
+
+    #abm_botones {
+      margin-top: 20px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .abm_div {
+      margin-left: 7%;
+      margin-right: 7%;
+      height: 25px;
+      padding: 4px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+
+    }
+
+    #abm_tipo {
+      width: 51%;
+    }
+
+    .abm_inputs {
+      width: 50%;
+    }
+
+    .labelTitulo {
+      margin-top: 2%;
+      margin-bottom: 2%;
+      text-align: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  </style>
+
+</head>
+
+<body id="cuerpo">
+
+  <div id="datos">
+
+    <div id="opciones">
+      <label class="labelTitulo">FORM DATOS</label>
+
+      <div id="filtrar">
+        <label>Filtrar por:</label>
+        <select id="filter_opcion">
+          <option id="option_todos" selected>Todos</option>
+          <option id="option_futbolista">Fultbolista</option>
+          <option id="option_profesional">Profesional</option>
+        </select>
+      </div>
+
+      <div id="calcular">
+        <label>Calcular edad promedio:</label>
+        <input style="width: 20%;" disabled="disabled" id="promedio">
+        <button id="botonCalcular">Calcular</button>
+      </div>
+      <label>Mostrar Columnas:</label>
+
+      <div id="divChecks">
+        <div>
+          <input type="checkbox" class="checks" id="checkID" value="1" checked />
+          <label for="check1">ID&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div>
+          <input type="checkbox" class="checks" id="checkNombre" value="2" checked />
+          <label for="check1">Nombre&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div>
+          <input type="checkbox" class="checks" id="checkApellido" value="3" checked />
+          <label for="check1">Apellido&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div>
+          <input type="checkbox" id="checkEdad" value="4" checked />
+          <label for="check1">Edad&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div>
+          <input type="checkbox" id="checkEquipo" value="5" checked />
+          <label for="check1">Equipo&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div>
+          <input type="checkbox" id="checkPosicion" value="6" checked />
+          <label for="check1">Posicion&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div>
+          <input type="checkbox" id="checkCantGoles" value="7" checked />
+          <label for="check1">CantGoles&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div>
+          <input type="checkbox" id="checkTitulo" value="8" checked />
+          <label for="check1">Titulo&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div>
+          <input type="checkbox" id="checkFacultad" value="9" checked />
+          <label for="check1">Facultad &nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div>
+          <input type="checkbox" id="checkAnoGraduacion" value="10" checked />
+          <label for="check1">AnoGraduacion&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div id="grilla">
+
+      <table>
+        <thead id="table_head">
+          <tr>
+            <th class="headCeldas" id="headID">ID</th>
+            <th class="headCeldas" id="headNombre">Nombre</th>
+            <th class="headCeldas" id="headApellido">Apellido</th>
+            <th class="headCeldas" id="headEdad">Edad</th>
+            <th class="headCeldas" id="headEquipo">Equipo</th>
+            <th class="headCeldas" id="headPosicion">Posicion</th>
+            <th class="headCeldas" id="headCantGoles">CantGoles</th>
+            <th class="headCeldas" id="headTitulo">Titulo</th>
+            <th class="headCeldas" id="headFacultad">Facultad</th>
+            <th class="headCeldas" id="headAnoGraduacion">Año de Graduacion</th>
+
+          </tr>
+        </thead>
+
+        <tbody id="table_body">
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div id="divAgregar">
+      <button id="botonAgregar">Agregar</button>
+    </div>
+
+  </div>
+
+  <div id="ABM" style="display: none;">
+    <div style="margin-bottom: 20px; text-align: center;margin-top: 3%;">
+      <label class="labelTitulo">FORMULARIO</label>
+
+    </div>
+
+    <div class="abm_div">
+      <label>ID: </label> <input id="inputID" disabled="disabled" class="abm_inputs" type="text">
+    </div>
+    <div class="abm_div">
+      <label>Nombre: </label> <input id="inputNombre" class="abm_inputs" type="text">
+    </div>
+    <div class="abm_div">
+      <label>Apellido: </label> <input id="inputApellido" class="abm_inputs" type="text">
+    </div>
+    <div class="abm_div">
+      <label>Edad: </label> <input id="inputEdad" class="abm_inputs" type="text">
+    </div>
+    <div class="abm_div">
+      <label>Tipo:</label>
+      <select class="abm_inputs" id="abm_tipo">
+        <option id="abm_futbolista">Futbolista</option>
+        <option id="abm_profesional">Profesional</option>
+      </select>
+    </div>
+    <div id="abm_equipo" class="abm_div">
+      <label>Equipo</label> <input id="inputEquipo" class="abm_inputs" type="text">
+    </div>
+    <div id="abm_posicion" class="abm_div">
+      <label>Posición</label> <input id="inputPosicion" class="abm_inputs" type="text">
+    </div>
+    <div id="abm_cantGoles" class="abm_div">
+      <label>CantGoles</label> <input id="inputCantGoles" class="abm_inputs" type="text">
+    </div>
+    <div id="abm_titulo" class="abm_div" style="display:none;">
+      <label>Titulo</label> <input id="inputTitulo" class="abm_inputs" type="text">
+    </div>
+    <div id="abm_facultad" class="abm_div" style="display:none;">
+      <label>Facultad</label> <input id="inputFacultad" class="abm_inputs" type="text">
+    </div>
+    <div id="abm_anoGraduacion" class="abm_div" style="display:none;">
+      <label>AnoGraduacion</label> <input id="inputAnoGraduacion" class="abm_inputs" type="text">
+    </div>
+
+    <div id="abm_botones">
+      <button id="botonAlta">Alta</button>
+      <button id="botonModificar">Modificar</button>
+      <button id="botonEliminar">Eliminar</button>
+      <button id="botonCancelar">Cancelar</button>
+    </div>
+  </div>
+</body>
+
+<script>
+
+  class Persona {
+    constructor(id, nombre, apellido, edad) {
+      this.id = id;
+      this.nombre = nombre;
+      this.apellido = apellido;
+      this.edad = edad;
+    }
+    toString() {
+      return "-ID: " + this.id + " -Nombre: " + this.nombre + " -Apellido: " + this.apellido + " -Edad: " + this.edad;
+    }
+  }
+  class Futbolista extends Persona {
+    constructor(id, nombre, apellido, edad, equipo, posicion, cantGoles) {
+      super(id, nombre, apellido, edad);
+      this.equipo = equipo;
+      this.posicion = posicion;
+      this.cantGoles = cantGoles;
+    }
+    toString() {
+      var texto = super.toString();
+      return texto + " -Equipo: " + this.equipo + " -Posicion: " + this.posicion + " -Cantidad de goles: " + this.cantGoles;
+    }
+  }
+  class Profesional extends Persona {
+    constructor(id, nombre, apellido, edad, titulo, facultad, anoGraduacion) {
+      super(id, nombre, apellido, edad);
+      this.titulo = titulo;
+      this.facultad = facultad;
+      this.anoGraduacion = anoGraduacion;
+    }
+
+    toString() {
+      var texto = super.toString();
+      return texto + " -Titulo: " + this.titulo + " -Facultad: " + this.facultad + " -Año de graduación: " + this.anoGraduacion;
+    }
+  }
+
+  var flag = true;
+  var listaPersonas = crearListaJson();
+  var listaFutbolistas = filtrarPorFutbolista();
+  var listaProfesionales = filtrarPorProfesional();
+  function $(id) {
+    return document.getElementById(id);
+  }
+
+
+  function calcularPromedios() {
+    var listaGrilla = elegirLista();
+    if (listaGrilla != null) {
+      const acumulador = listaGrilla.reduce((valorAnterior, elemento, indice, vector) => {
+        return valorAnterior + elemento.edad;
+      }, 0);
+      $("promedio").value = acumulador / listaGrilla.length;
+
+    } else {
+      $("promedio").value = 0;
+    }
+  }
+
+  function crearListaJson() {
+    var datos = JSON.parse('[{ "id": 1, "nombre": "Marcelo", "apellido": "Luque", "edad": 45, "titulo": "Ingeniero", "facultad": "UTN", "añoGraduacion": 2002 }, { "id": 2, "nombre": "Ramiro", "apellido": "Escobar", "edad": 35, "titulo": "Medico", "facultad": "UBA", "añoGraduacion": 2012 }, { "id": 3, "nombre": "Facundo", "apellido": "Cairo", "edad": 30, "titulo": "Abogado", "facultad": "UCA", "añoGraduacion": 2017 }, { "id": 4, "nombre": "Fernando", "apellido": "Nieto", "edad": 18, "equipo": "Independiente", "posicion": "Delantero", "cantidadGoles": 7 }, { "id": 5, "nombre": "Manuel", "apellido": "Loza", "edad": 20, "equipo": "Racing", "posicion": "Volante", "cantidadGoles": 2 }, { "id": 6, "nombre": "Nicolas", "apellido": "Serrano", "edad": 23, "equipo": "Boca", "posicion": "Arquero", "cantidadGoles": 0 }]');
+
+    var listaPersonasJson = [];
+
+    for (let i = 0; i < datos.length; i++) {
+      if ("equipo" in datos[i]) {
+        var futbolista = new Futbolista(datos[i].id, datos[i].nombre, datos[i].apellido, datos[i].edad, datos[i].equipo, datos[i].posicion, datos[i].cantidadGoles);
+        listaPersonasJson.push(futbolista);
+      }
+      if ("titulo" in datos[i]) {
+        var profesional = new Profesional(datos[i].id, datos[i].nombre, datos[i].apellido, datos[i].edad, datos[i].titulo, datos[i].facultad, datos[i].añoGraduacion);
+        listaPersonasJson.push(profesional);
+      };
+    }
+    return listaPersonasJson;
+  }
+
+  function elegirLista() {
+    var listaGrilla;
+    if (listaPersonas != null) {
+      if ($("option_todos").selected) {
+        listaGrilla = listaPersonas;
+      }
+      if ($("option_futbolista").selected) {
+        listaGrilla = listaFutbolistas;
+      }
+      if ($("option_profesional").selected) {
+        listaGrilla = listaProfesionales;
+      }
+      return listaGrilla;
+    }
+
+
+  }
+
+  function cargarGrilla() {
+    vaciarGrilla();
+
+    var listaGrilla = elegirLista();
+
+    for (let i = 0; i < listaGrilla.length; i++) {
+      var fila = document.createElement("tr");
+      var idFila = "fila_" + (i + 1);
+      fila.setAttribute("class", "fila");
+      fila.setAttribute("id", idFila);
+
+      fila.addEventListener("dblclick", (e) => {
+        elegirPersona(e);
+        $("botonAlta").style.display = "none";
+        $("botonEliminar").style.display = "";
+        $("botonModificar").style.display = "";
+        $("abm_tipo").disabled = "disabled";
+        $("datos").style.display = "none";
+      });
+
+      //CELDA 1 - ID
+      var textoCelda1 = listaGrilla[i].id;
+      let celda1 = document.createElement("td");
+      let texto1 = document.createTextNode(textoCelda1);
+      celda1.appendChild(texto1);
+      celda1.setAttribute("class", "bodyID");
+      fila.appendChild(celda1);
+
+      //CELDA 2 - NOMBRE
+      var textoCelda2 = listaGrilla[i].nombre;
+      let celda2 = document.createElement("td");
+      let texto2 = document.createTextNode(textoCelda2);
+      celda2.appendChild(texto2);
+      celda2.setAttribute("class", "bodyNombre");
+      fila.appendChild(celda2);
+
+      //CELDA 3 - APELLIDO
+      var textoCelda3 = listaGrilla[i].apellido;
+      let celda3 = document.createElement("td");
+      let texto3 = document.createTextNode(textoCelda3);
+      celda3.appendChild(texto3);
+      celda3.setAttribute("class", "bodyApellido");
+      fila.appendChild(celda3);
+
+      //CELDA 4 - EDAD
+      var textoCelda4 = listaGrilla[i].edad;
+      let celda4 = document.createElement("td");
+      let texto4 = document.createTextNode(textoCelda4);
+      celda4.appendChild(texto4);
+      celda4.setAttribute("class", "bodyEdad");
+      fila.appendChild(celda4);
+
+      //CELDA 5 -EQUIPO
+      let celda5 = document.createElement("td");
+      if (listaGrilla[i].equipo == undefined) {
+        let texto5 = document.createTextNode("~");
+        celda5.appendChild(texto5);
+      } else {
+        let texto5 = document.createTextNode(listaGrilla[i].equipo);
+        celda5.appendChild(texto5);
+      }
+      celda5.setAttribute("class", "bodyEquipo");
+      fila.appendChild(celda5);
+
+      //CELDA 6 - POSICION
+      var textoCelda6 = listaGrilla[i].posicion;
+      let celda6 = document.createElement("td");
+      var texto6;
+      if (textoCelda6 == undefined) {
+        texto6 = document.createTextNode("~");
+      } else {
+        texto6 = document.createTextNode(textoCelda6);
+      }
+      celda6.appendChild(texto6);
+      celda6.setAttribute("class", "bodyPosicion");
+      fila.appendChild(celda6);
+
+      //CELDA 7 - CANT GOLES
+      let celda7 = document.createElement("td");
+      if (listaGrilla[i].cantGoles == undefined) {
+        let texto7 = document.createTextNode("~");
+        celda7.appendChild(texto7);
+      } else {
+        let texto7 = document.createTextNode(listaGrilla[i].cantGoles);
+        celda7.appendChild(texto7);
+      }
+      celda7.setAttribute("class", "bodyCantGoles");
+      fila.appendChild(celda7);
+
+      //CELDA 8 - TITULO
+      let celda8 = document.createElement("td");
+      if (listaGrilla[i].titulo == undefined) {
+        let texto8 = document.createTextNode("~");
+        celda8.appendChild(texto8);
+      } else {
+        let texto8 = document.createTextNode(listaGrilla[i].titulo);
+        celda8.appendChild(texto8);
+      }
+      celda8.setAttribute("class", "bodyTitulo");
+      fila.appendChild(celda8);
+
+
+      //CELDA 9 - FACULTAD
+      let celda9 = document.createElement("td");
+      if (listaGrilla[i].facultad == undefined) {
+        let texto9 = document.createTextNode("~");
+        celda9.appendChild(texto9);
+      } else {
+        let texto9 = document.createTextNode(listaGrilla[i].facultad);
+        celda9.appendChild(texto9);
+      }
+      celda9.setAttribute("class", "bodyFacultad");
+      fila.appendChild(celda9);
+
+      //CELDA 10 -ANOGRADUACION
+      let celda10 = document.createElement("td");
+      if (listaGrilla[i].anoGraduacion == undefined) {
+        let texto10 = document.createTextNode("~");
+        celda10.appendChild(texto10);
+      } else {
+        let texto10 = document.createTextNode(listaGrilla[i].anoGraduacion);
+        celda10.appendChild(texto10);
+      }
+      celda10.setAttribute("class", "bodyAnoGraduacion");
+      fila.appendChild(celda10);
+
+      $("table_body").appendChild(fila);
+    }
+  }
+  function abrirFormVacio() {
+    $("ABM").style.display = "";
+    vaciarFormulario();
+    seleccionarTipo();
+    $("inputID").value = listaPersonas.length + 1;
+    $("botonModificar").style.display = "none";
+    $("botonEliminar").style.display = "none";
+    $("datos").style.display = "none";
+  }
+  function abrirForm() {
+    $("ABM").style.display = "";
+    vaciarFormulario();
+    seleccionarTipo();
+    $("botonAlta").style.display = "";
+  }
+  function cerrarForm() {
+    $("ABM").style.display = "none";
+    $("datos").style.display = "";
+  }
+  function seleccionarTipo() {
+    if ($("abm_futbolista").selected) {
+      $("abm_titulo").style.display = "none";
+      $("abm_facultad").style.display = "none";
+      $("abm_anoGraduacion").style.display = "none";
+      $("abm_equipo").style.display = "";
+      $("abm_posicion").style.display = "";
+      $("abm_cantGoles").style.display = "";
+    }
+    if ($("abm_profesional").selected) {
+      $("abm_equipo").style.display = "none";
+      $("abm_posicion").style.display = "none";
+      $("abm_cantGoles").style.display = "none";
+      $("abm_titulo").style.display = "";
+      $("abm_facultad").style.display = "";
+      $("abm_anoGraduacion").style.display = "";
+    }
+  }
+  function ocultarColumnas() {
+    var listaChecks = document.getElementsByClassName("fila");
+
+    if ($("checkID").checked) {
+      $("headID").style.display = "";
+      var bodies = document.getElementsByClassName('bodyID');
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = '';
+      }
+    } else {
+      $("headID").style.display = "none";
+      var bodies = document.getElementsByClassName('bodyID');
+
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = 'none';
+      }
+    }
+
+    if ($("checkNombre").checked) {
+      $("headNombre").style.display = "";
+      var bodies = document.getElementsByClassName('bodyNombre');
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = '';
+      }
+    } else {
+      $("headNombre").style.display = "none";
+      var bodies = document.getElementsByClassName('bodyNombre');
+
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = 'none';
+      }
+    }
+
+    if ($("checkApellido").checked) {
+      $("headApellido").style.display = "";
+      var bodies = document.getElementsByClassName('bodyApellido');
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = '';
+      }
+    } else {
+      $("headApellido").style.display = "none";
+      var bodies = document.getElementsByClassName('bodyApellido');
+
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = 'none';
+      }
+    }
+
+    if ($("checkEdad").checked) {
+      $("headEdad").style.display = "";
+      var bodies = document.getElementsByClassName('bodyEdad');
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = '';
+      }
+    } else {
+      $("headEdad").style.display = "none";
+      var bodies = document.getElementsByClassName('bodyEdad');
+
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = 'none';
+      }
+    }
+
+
+    if ($("checkEquipo").checked) {
+      $("headEquipo").style.display = "";
+      var bodies = document.getElementsByClassName('bodyEquipo');
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = '';
+      }
+    } else {
+      $("headEquipo").style.display = "none";
+      var bodies = document.getElementsByClassName('bodyEquipo');
+
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = 'none';
+      }
+    }
+
+    if ($("checkPosicion").checked) {
+      $("headPosicion").style.display = "";
+      var bodies = document.getElementsByClassName('bodyPosicion');
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = '';
+      }
+    } else {
+      $("headPosicion").style.display = "none";
+      var bodies = document.getElementsByClassName('bodyPosicion');
+
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = 'none';
+      }
+    }
+
+    if ($("checkCantGoles").checked) {
+      $("headCantGoles").style.display = "";
+      var bodies = document.getElementsByClassName('bodyCantGoles');
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = '';
+      }
+    } else {
+      $("headCantGoles").style.display = "none";
+      var bodies = document.getElementsByClassName('bodyCantGoles');
+
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = 'none';
+      }
+    }
+
+    if ($("checkTitulo").checked) {
+      $("headTitulo").style.display = "";
+      var bodies = document.getElementsByClassName('bodyTitulo');
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = '';
+      }
+    } else {
+      $("headTitulo").style.display = "none";
+      var bodies = document.getElementsByClassName('bodyTitulo');
+
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = 'none';
+      }
+    }
+
+    if ($("checkFacultad").checked) {
+      $("headFacultad").style.display = "";
+      var bodies = document.getElementsByClassName('bodyFacultad');
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = '';
+      }
+    } else {
+      $("headFacultad").style.display = "none";
+      var bodies = document.getElementsByClassName('bodyFacultad');
+
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = 'none';
+      }
+    }
+
+    if ($("checkAnoGraduacion").checked) {
+      $("headAnoGraduacion").style.display = "";
+      var bodies = document.getElementsByClassName('bodyAnoGraduacion');
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = '';
+      }
+    } else {
+      $("headAnoGraduacion").style.display = "none";
+      var bodies = document.getElementsByClassName('bodyAnoGraduacion');
+
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = 'none';
+      }
+    }
+
+    if ($("checkID").checked) {
+      $("headID").style.display = "";
+      var bodies = document.getElementsByClassName('bodyID');
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = '';
+      }
+    } else {
+      $("headID").style.display = "none";
+      var bodies = document.getElementsByClassName('bodyID');
+
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = 'none';
+      }
+    }
+
+    if ($("checkID").checked) {
+      $("headID").style.display = "";
+      var bodies = document.getElementsByClassName('bodyID');
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = '';
+      }
+    } else {
+      $("headID").style.display = "none";
+      var bodies = document.getElementsByClassName('bodyID');
+
+      for (var i = 0; i < bodies.length; i++) {
+        bodies[i].style.display = 'none';
+      }
+    }
+  }
+  function vaciarGrilla() {
+    let b = $("table_body");
+    while (b.lastElementChild) {
+      b.removeChild(b.lastElementChild);
+    }
+  }
+  function vaciarFormulario() {
+    $("inputID").value = "";
+    $("inputNombre").value = "";
+    $("inputApellido").value = "";
+    $("inputEdad").value = "";
+    $("inputEquipo").value = "";
+    $("inputPosicion").value = "";
+    $("inputCantGoles").value = "";
+    $("inputTitulo").value = "";
+    $("inputFacultad").value = "";
+    $("inputAnoGraduacion").value = "";
+  }
+
+  function ordenarPorID() {
+    var listaGrilla = elegirLista();
+    if (!flag) {
+      listaGrilla.sort(function (a, b) {
+
+        if (a.id > b.id) {
+          return 1;
+        } else if (a.id < b.id) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+      });
+      flag = true;
+    } else {
+      listaGrilla.reverse();
+      flag = false;
+    }
+    cargarGrilla();
+  }
+  function ordenarPorNombre() {
+    var listaGrilla = elegirLista();
+    if (flag) {
+      listaGrilla.sort(function (a, b) {
+
+        if (a.nombre.toLowerCase() > b.nombre.toLowerCase()) {
+          return 1;
+        } else if (a.nombre < b.nombre) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+
+      });
+      flag = false;
+    } else {
+      listaGrilla.reverse();
+      flag = true;
+    }
+    cargarGrilla();
+  }
+  function ordenarPorApellido() {
+
+    var listaGrilla = elegirLista();
+    if (flag) {
+      listaGrilla.sort(function (a, b) {
+
+        if (a.apellido.toLowerCase() > b.apellido.toLowerCase()) {
+          return 1;
+        } else if (a.apellido.toLowerCase() < b.apellido.toLowerCase()) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+
+      });
+      flag = false;
+    } else {
+      listaGrilla.reverse();
+      flag = true;
+    }
+    cargarGrilla();
+  }
+  function ordenarPorEdad() {
+    var listaGrilla = elegirLista();
+    if (flag) {
+      listaGrilla.sort(function (a, b) {
+
+        if (a.edad > b.edad) {
+          return 1;
+        } else if (a.edad < b.edad) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+      });
+      flag = false;
+    } else {
+      listaGrilla.reverse();
+      flag = true;
+    }
+    cargarGrilla();
+  }
+  function ordenarPorEquipo() {
+    var listaGrilla = elegirLista();
+
+    if (flag) {
+      listaGrilla.sort(function (a, b) {
+        if (a.equipo == undefined) {
+          a.equipo = "~";
+        }
+        if (b.equipo == undefined) {
+          b.equipo = "~";
+        }
+        if (a.equipo.toLowerCase() > b.equipo.toLowerCase()) {
+          return 1;
+        } else if (a.equipo.toLowerCase() < b.equipo.toLowerCase()) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+
+      });
+      flag = false;
+    } else {
+      listaGrilla.reverse();
+      flag = true;
+    }
+    cargarGrilla();
+  }
+  function ordenarPorPosicion() {
+    var listaGrilla = elegirLista();
+    if (flag) {
+      listaGrilla.sort(function (a, b) {
+        if (a.posicion == undefined) {
+          a.posicion = "~";
+        }
+        if (b.posicion == undefined) {
+          b.posicion = "~";
+        }
+        if (a.posicion.toLowerCase() > b.posicion.toLowerCase()) {
+          return 1;
+        } else if (a.posicion.toLowerCase() < b.posicion.toLowerCase()) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+
+      });
+      flag = false;
+    } else {
+      listaGrilla.reverse();
+      flag = true;
+    }
+    cargarGrilla();
+  }
+  function ordenarPorCantGoles() {
+    var listaGrilla = elegirLista();
+    if (flag) {
+      listaGrilla.sort(function (a, b) {
+        if (a.cantGoles == undefined) {
+          a.cantGoles = "~";
+        }
+        if (b.cantGoles == undefined) {
+          b.cantGoles = "~";
+        }
+        if (a.cantGoles.toString() > b.cantGoles.toString()) {
+          return 1;
+        } else if (a.cantGoles.toString() < b.cantGoles.toString()) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+
+      });
+      flag = false;
+    } else {
+      listaGrilla.reverse();
+      flag = true;
+    }
+    cargarGrilla();
+
+  }
+  function ordenarPorTitulos() {
+    var listaGrilla = elegirLista();
+    if (flag) {
+      listaGrilla.sort(function (a, b) {
+        if (a.titulo == undefined) {
+          a.titulo = "~";
+        }
+        if (b.titulo == undefined) {
+          b.titulo = "~";
+        }
+        if (a.titulo.toLowerCase() > b.titulo.toLowerCase()) {
+          return 1;
+        } else if (a.titulo.toLowerCase() < b.titulo.toLowerCase()) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+
+      });
+      flag = false;
+    } else {
+      listaGrilla.reverse();
+      flag = true;
+    }
+    cargarGrilla();
+
+  }
+  function ordenarPorFacultad() {
+    var listaGrilla = elegirLista();
+    if (flag) {
+      listaGrilla.sort(function (a, b) {
+        if (a.facultad == undefined) {
+          a.facultad = "~";
+        }
+        if (b.facultad == undefined) {
+          b.facultad = "~";
+        }
+        if (a.facultad.toString() > b.facultad.toString()) {
+          return 1;
+        } else if (a.facultad.toString() < b.facultad.toString()) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+
+      });
+      flag = false;
+    } else {
+      listaGrilla.reverse();
+      flag = true;
+    }
+    
+    cargarGrilla();
+  }
+  function ordenarPorAnoGraduacion() {
+    var listaGrilla = elegirLista();
+    if (flag) {
+      listaGrilla.sort(function (a, b) {
+        if (a.anoGraduacion == undefined) {
+          a.anoGraduacion = "~";
+        }
+        if (b.anoGraduacion == undefined) {
+          b.anoGraduacion = "~";
+        }
+        if (a.anoGraduacion.toString() > b.anoGraduacion.toString()) {
+          return 1;
+        } else if (a.anoGraduacion.toString() < b.anoGraduacion.toString()) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+
+      });
+      flag = false;
+    } else {
+      listaGrilla.reverse();
+      flag = true;
+    }
+    cargarGrilla();
+  }
+  function filtrarPorFutbolista() {
+
+    var nuevaLista = []
+    listaPersonas.map(function (elemento) {
+      if (elemento instanceof Futbolista) {
+        nuevaLista.push(elemento);
+      }
+    });
+    return nuevaLista;
+  }
+  function filtrarPorProfesional() {
+
+    var nuevaLista = []
+    listaPersonas.map(function (elemento) {
+      if (elemento instanceof Profesional) {
+        nuevaLista.push(elemento);
+      }
+    });
+    return nuevaLista;
+
+  }
+
+  function altaPersona() {
+    error = true;
+    boolID = ($("inputID").value) > 0;
+    boolNombre = ($("inputNombre").value) != null;
+    boolApellido = ($("inputApellido").value) != null;
+    boolEdad = ($("inputEdad").value) > 15;
+
+    if (boolID && boolNombre && boolApellido && boolEdad) {
+      id = ($("inputID").value);
+      nombre = $("inputNombre").value;
+      apellido = $("inputApellido").value;
+      edad = $("inputEdad").value;
+
+      if ($("abm_futbolista").selected) {
+        boolEquipo = ($("inputEquipo").value) != null;
+        boolPosicion = ($("inputPosicion").value) != null;
+        boolCantGoles = parseInt(($("inputCantGoles").value)) > -1;
+
+        if (boolEquipo && boolPosicion && boolCantGoles) {
+          equipo = ($("inputEquipo").value);
+          posicion = ($("inputPosicion").value);
+          cantGoles = parseInt(($("inputCantGoles").value));
+          var futbolista = new Futbolista(id, nombre, apellido, edad, equipo, posicion, cantGoles)
+          listaPersonas.push(futbolista);
+          alert("Se ha realizado el alta!");
+          cerrarForm();
+          cargarGrilla();
+        } else {
+          error = false;
+        }
+      }
+
+      if ($("abm_profesional").selected) {
+
+        boolTitulo = ($("inputTitulo").value) != null;
+        boolFacultad = ($("inputFacultad").value) != null;
+        boolAnoGraduacion = (parseInt($("inputAnoGraduacion").value)) > 1950;
+
+        if (boolTitulo && boolFacultad && boolAnoGraduacion) {
+          titulo = ($("inputTitulo").value);
+          facultad = ($("inputFacultad").value);
+          anoGraduacion = parseInt($("inputAnoGraduacion").value);
+
+          var profesional = new Profesional(id, nombre, apellido, edad, titulo, facultad, anoGraduacion)
+          listaPersonas.push(profesional);
+          alert("Se ha realizado el alta!");
+
+          cerrarForm();
+          cargarGrilla();
+        } else {
+          error = false;
+        }
+      }
+    } else {
+      error = false;
+    }
+    if (!error) {
+      alert("Ha ingresado datos inválidos!");
+    }
+  }
+  function elegirPersona(e) {
+    var listaGrilla = elegirLista();
+
+    let tr = e.target.parentNode;
+    var indice = tr.children[0].textContent;
+    var unaPersona = listaGrilla[indice - 1];
+
+    if (unaPersona instanceof Futbolista) {
+      $("abm_futbolista").selected = true;
+      abrirForm();
+      $("inputID").value = unaPersona.id;
+      $("inputNombre").value = unaPersona.nombre;
+      $("inputApellido").value = unaPersona.apellido;
+      $("inputEdad").value = unaPersona.edad;
+
+      $("inputEquipo").value = unaPersona.equipo;
+      $("inputPosicion").value = unaPersona.posicion;
+      $("inputCantGoles").value = unaPersona.cantGoles;
+
+    } else {
+      $("abm_profesional").selected = true;
+      abrirForm();
+      $("inputID").value = unaPersona.id;
+      $("inputNombre").value = unaPersona.nombre;
+      $("inputApellido").value = unaPersona.apellido;
+      $("inputEdad").value = unaPersona.edad;
+
+      $("inputTitulo").value = unaPersona.titulo;
+      $("inputFacultad").value = unaPersona.facultad;
+      $("inputAnoGraduacion").value = unaPersona.anoGraduacion;
+    }
+
+  }
+  function modificarPersona() {
+
+    boolError = true;
+    boolNombre = ($("inputNombre")).value != null;
+    boolApellido = ($("inputApellido").value) != null;
+    boolEdad = ($("inputEdad").value) > 15;
+
+    if (boolNombre && boolApellido && boolEdad) {
+      id = $("inputID").value;
+      nombre = $("inputNombre").value;
+      apellido = $("inputApellido").value;
+      edad = $("inputEdad").value;
+
+      if ($("abm_futbolista").selected) {
+        boolEquipo = ($("inputEquipo").value) != null;
+        boolPosicion = ($("inputPosicion").value) != null;
+        boolCantGoles = parseInt(($("inputCantGoles").value)) > -1;
+
+        if (boolEquipo && boolPosicion && boolCantGoles) {
+          equipo = ($("inputEquipo").value);
+          posicion = ($("inputPosicion").value);
+          cantGoles = parseInt(($("inputCantGoles").value));
+          var futbolista = new Futbolista(id, nombre, apellido, edad, equipo, posicion, cantGoles)
+
+          for (let index = 0; index < listaPersonas.length; index++) {
+
+            if (listaPersonas[index].id == futbolista.id) {
+              listaPersonas[index] = futbolista;
+              break;
+            }
+          }
+          alert("Se ha realizado la modificación!");
+          cargarGrilla();
+          cerrarForm();
+        } else {
+          boolError = false;
+        }
+      }
+
+      if ($("abm_profesional").selected) {
+
+        boolTitulo = ($("inputTitulo").value) != null;
+        boolFacultad =($("inputFacultad").value) != null;
+        boolAnoGraduacion  = (parseInt($("inputAnoGraduacion").value)) > 1950;
+
+        if (boolTitulo && boolFacultad && boolAnoGraduacion) {
+          titulo = ($("inputTitulo").value);
+          facultad = parseInt(($("inputFacultad").value));
+          anoGraduacion = parseInt(($("inputAnoGraduacion").value));
+
+          var profesional = new Profesional(id, nombre, apellido, edad, titulo, facultad, anoGraduacion)
+
+          for (let index = 0; index < listaPersonas.length; index++) {
+
+            if (listaPersonas[index].id == profesional.id) {
+              listaPersonas[index] = profesional;
+              break;
+            }
+          }
+          alert("Se ha realizado la modificación!");
+          cargarGrilla();
+          cerrarForm();
+        } else {
+          boolError = false;
+        }
+      }
+    }
+    if (!boolError) {
+      alert("Ha ingresado datos inválidos!");
+    }
+  }
+  function eliminarPersona() {
+    var id = $("inputID").value;
+
+    for (let index = 0; index < listaPersonas.length; index++) {
+      if (listaPersonas[index].id == id) {
+        listaPersonas.splice(index, 1);
+        alert("Se ha realizado la eliminación");
+
+        break;
+      }
+    }
+    $("datos").style.display = "";
+    $("ABM").style.display = "none";
+    cargarGrilla();
+  }
+
+  window.addEventListener("load", cargarGrilla);
+
+  $("filter_opcion").addEventListener("click", cargarGrilla);
+  $("botonCalcular").addEventListener("click", calcularPromedios);
+  $("botonAgregar").addEventListener("click", abrirFormVacio);
+  $("divChecks").addEventListener("click", ocultarColumnas);
+  $("abm_tipo").addEventListener("click", seleccionarTipo);
+  $("headID").addEventListener("click", ordenarPorID);
+  $("headNombre").addEventListener("click", ordenarPorNombre);
+  $("headApellido").addEventListener("click", ordenarPorApellido);
+  $("headEdad").addEventListener("click", ordenarPorEdad);
+  $("headEquipo").addEventListener("click", ordenarPorEquipo);
+  $("headPosicion").addEventListener("click", ordenarPorPosicion);
+  $("headCantGoles").addEventListener("click", ordenarPorCantGoles);
+  $("headTitulo").addEventListener("click", ordenarPorTitulos);
+  $("headFacultad").addEventListener("click", ordenarPorFacultad);
+  $("headAnoGraduacion").addEventListener("click", ordenarPorAnoGraduacion);
+  $("botonModificar").addEventListener("click", modificarPersona);
+  $("botonEliminar").addEventListener("click", eliminarPersona);
+  $("botonCancelar").addEventListener("click", cerrarForm);
+  $("botonAlta").addEventListener("click", altaPersona);
+
+</script>
+
+
+</html>
